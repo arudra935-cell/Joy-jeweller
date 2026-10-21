@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#103a2e">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>JOY Jewellery</title>
+<style>
+:root{--green:#103a2e;--gold:#d9ad55;--cream:#faf6ee;--ink:#1d2822;--muted:#6b756f}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:var(--green);color:white;padding:18px max(16px,calc((100% - 1120px)/2));position:sticky;top:0;z-index:5;box-shadow:0 4px 20px #0002}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{font-family:Georgia,serif;font-size:32px;letter-spacing:4px;color:#f2d28d}.tag{font-size:11px;letter-spacing:2px;color:#e7dec9}
+button,input,select{font:inherit}button{border:0;border-radius:10px;padding:11px 14px;cursor:pointer;font-weight:650}button:focus,input:focus{outline:2px solid var(--gold);outline-offset:2px}.primary{background:var(--green);color:white}.gold{background:var(--gold);color:#1b251f}.outline{background:transparent;border:1px solid #c9cfc9;color:var(--green)}.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.nav button{background:#ffffff14;color:#fff;border:1px solid #ffffff28}.nav button.active{background:var(--gold);color:#1d2822}
+main{max-width:1120px;margin:auto;padding:22px 16px 45px}.hero{border-radius:20px;padding:28px;background:linear-gradient(115deg,#e7d0a5,#f8f0df);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:16px;overflow:hidden}.hero h1{font:clamp(30px,5vw,52px) Georgia,serif;line-height:1.06;margin:8px 0 12px;color:#173d2e}.hero p{max-width:480px;line-height:1.6}.hero .eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#795b29}.hero-art{font-size:100px;text-align:center;filter:drop-shadow(0 8px 8px #6b4a2730)}.searchrow{display:flex;gap:10px;margin:20px 0 12px}.searchrow input{flex:1;min-width:0;padding:13px;border:1px solid #d8ddd6;border-radius:12px;background:white}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}.filters button{border:1px solid #d9ded7;background:white;color:var(--green)}.filters button.active{background:var(--green);color:white}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 14px}.sectionhead h2{font:26px Georgia,serif;margin:0}.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid #e7e5de;border-radius:16px;overflow:hidden;box-shadow:0 3px 14px #172d1b08}.product-art{height:180px;background:radial-gradient(circle at 50% 35%,#fff9e9,#e7d3ae);display:grid;place-items:center;font-size:76px}.product-body{padding:13px}.product-body h3{font-size:15px;margin:0 0 6px}.price{font-weight:800;margin:9px 0}.small{font-size:12px;color:var(--muted)}.actions{display:flex;gap:7px;margin-top:12px}.actions .primary{flex:1}.heart{background:#f7f4ed;color:#8d3d3d;padding:10px 12px}
+.panel{background:white;border:1px solid #e7e5de;border-radius:16px;padding:20px;margin-top:16px}.empty{text-align:center;padding:35px 15px}.cartrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #eee}.cartrow:last-child{border:0}.cartrow h3{font-size:15px;margin:0 0 5px}.qty{display:flex;gap:8px;align-items:center;margin-top:8px}.qty button{padding:5px 10px}.total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;margin:18px 0}.notice{background:#e6f3e7;color:#1b5931;border-radius:10px;padding:12px;margin:14px 0}.footer{background:var(--green);color:#eee8d9;text-align:center;padding:24px 16px;font-size:13px}.footer strong{color:#f2d28d}.hidden{display:none}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-art{display:none}.product-art{height:150px}}
+@media(max-width:420px){.grid{gap:10px}.product-art{height:125px;font-size:58px}.product-body{padding:10px}.brand{font-size:27px}.hero{padding:22px}.actions button{padding:10px 8px;font-size:12px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="brand">JOY</div><div class="tag">JEWELLERY · YOUR STYLE, YOUR JOY</div></div><button class="gold" onclick="showPage('cart')">🛍 Bag <span id="cartCount">0</span></button></div>
+<div class="nav"><button class="active" data-page="home" onclick="showPage('home')">Home</button><button data-page="categories" onclick="showPage('categories')">Categories</button><button data-page="wishlist" onclick="showPage('wishlist')">♡ Wishlist</button><button data-page="orders" onclick="showPage('orders')">My Orders</button><button data-page="account" onclick="showPage('account')">Account</button></div></header>
+<main>
+<div id="notice" class="notice hidden"></div>
+<section id="homePage">
+<div class="hero"><div><div class="eyebrow">THE JOY COLLECTION</div><h1>Jewellery for every moment.</h1><p>Discover pieces that make you feel special. Browse timeless designs for celebrations, gifting and everyday elegance.</p><button class="primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Explore collection →</button></div><div class="hero-art">💎</div></div>
+<div class="searchrow"><input id="search" placeholder="Search rings, necklaces, earrings..." oninput="renderProducts()"><button class="primary" onclick="renderProducts()">Search</button></div>
+<div class="filters" id="filters"></div>
+<div class="sectionhead"><h2 id="productHeading">Shop jewellery</h2><span class="muted">Sample catalogue</span></div>
+<div class="grid" id="products"></div>
+<p class="muted">Demo note: prices and jewellery images/icons are illustrative. Confirm actual weight, purity, making charges, taxes and stock before purchase.</p>
+</section>
+<section id="categoriesPage" class="hidden"><div class="sectionhead"><h2>Shop by category</h2></div><div class="grid" id="categoryGrid"></div></section>
+<section id="wishlistPage" class="hidden"><div class="sectionhead"><h2>Your wishlist</h2></div><div id="wishlistContent" class="panel"></div></section>
+<section id="cartPage" class="hidden"><div class="sectionhead"><h2>Your shopping bag</h2></div><div id="cartContent" class="panel"></div></section>
+<section id="ordersPage" class="hidden"><div class="sectionhead"><h2>My orders</h2></div><div class="panel empty"><div style="font-size:42px">📦</div><h3>Your orders will appear here</h3><p class="muted">Real order history and tracking require a connected order-management service.</p><button class="primary" onclick="showPage('home')">Browse jewellery</button></div></section>
+<section id="accountPage" class="hidden"><div class="sectionhead"><h2>Your JOY account</h2></div><div class="panel"><p class="muted">Sign-in is a demo. No personal data is submitted or stored.</p><label for="phone">Mobile number</label><div class="searchrow"><input id="phone" type="tel" placeholder="Enter mobile number"><button class="primary" onclick="demoLogin()">Continue</button></div><p class="muted">OTP authentication, address book and secure checkout must be integrated before launch.</p></div></section>
+</main>
+<footer class="footer"><strong>JOY Jewellery</strong><p>Shop with confidence · Verified sellers · Customer support</p><span>Prototype only — no live payments or real orders.</span></footer>
+<script>
+const products=[
+{id:1,name:'Floral Gold Necklace',cat:'Necklaces',price:72500,purity:'22K',art:'📿'},
+{id:2,name:'Diamond Drop Earrings',cat:'Earrings',price:45300,purity:'18K',art:'💎'},
+{id:3,name:'Classic Gold Bangle',cat:'Bangles',price:38600,purity:'22K',art:'⭕'},
+{id:4,name:'Solitaire Gold Ring',cat:'Rings',price:28500,purity:'18K',art:'💍'},
+{id:5,name:'Gold Pendant',cat:'Pendants',price:18900,purity:'22K',art:'✨'},
+{id:6,name:'Bridal Gold Necklace',cat:'Necklaces',price:125000,purity:'22K',art:'📿'},
+{id:7,name:'Everyday Gold Hoops',cat:'Earrings',price:15900,purity:'18K',art:'✨'},
+{id:8,name:'Classic Signet Ring',cat:'Rings',price:22500,purity:'18K',art:'💍'}];
+let category='All',cart=[],wishlist=[],page='home';
+const money=n=>'₹'+n.toLocaleString('en-IN');
+function note(t){const n=document.getElementById('notice');n.textContent=t;n.classList.remove('hidden');setTimeout(()=>n.classList.add('hidden'),3500)}
+function showPage(p){page=p;['home','categories','wishlist','cart','orders','account'].forEach(x=>document.getElementById(x+'Page').classList.toggle('hidden',x!==p));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));if(p==='cart')renderCart();if(p==='wishlist')renderWishlist();if(p==='categories')renderCategories();window.scrollTo({top:0,behavior:'smooth'})}
+function renderFilters(){document.getElementById('filters').innerHTML=['All','Rings','Necklaces','Earrings','Bangles','Pendants'].map(c=>`<button class="${c===category?'active':''}" onclick="category='${c}';renderFilters();renderProducts()">${c}</button>`).join('')}
+function renderProducts(){const q=(document.getElementById('search')?.value||'').toLowerCase();const list=products.filter(p=>(category==='All'||p.cat===category)&&(p.name+' '+p.cat).toLowerCase().includes(q));document.getElementById('productHeading').textContent=category==='All'?'Shop jewellery':category;document.getElementById('products').innerHTML=list.map(p=>`<article class="card"><div class="product-art">${p.art}</div><div class="product-body"><h3>${p.name}</h3><div class="small">${p.purity} gold · illustrative price</div><div class="price">${money(p.price)}</div><div class="actions"><button class="primary" onclick="addCart(${p.id})">Add to bag</button><button class="heart" aria-label="Add to wishlist" onclick="toggleWish(${p.id})">${wishlist.includes(p.id)?'♥':'♡'}</button></div></div></article>`).join('')||'<p>No matching jewellery found.</p>';renderFilters()}
+function addCart(id){const found=cart.find(x=>x.id===id);if(found)found.qty++;else cart.push({id,qty:1});updateCount();note(products.find(p=>p.id===id).name+' added to your bag.')}
+function toggleWish(id){wishlist.includes(id)?wishlist=wishlist.filter(x=>x!==id):wishlist.push(id);renderProducts();if(page==='wishlist')renderWishlist();note('Wishlist updated.')}
+function updateCount(){document.getElementById('cartCount').textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function renderCart(){const el=document.getElementById('cartContent');if(!cart.length){el.innerHTML='<div class="empty"><div style="font-size:42px">🛍</div><h3>Your bag is waiting</h3><p class="muted">Explore the collection and add your favourite pieces.</p><button class="primary" onclick="showPage(\\'home\\')">Explore jewellery</button></div>';return}el.innerHTML=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `<div class="cartrow"><div><h3>${p.name}</h3><div class="muted">${money(p.price)} each</div><div class="qty"><button class="outline" onclick="changeQty(${p.id},-1)">−</button><span>${x.qty}</span><button class="outline" onclick="changeQty(${p.id},1)">+</button><button class="outline" onclick="removeCart(${p.id})">Remove</button></div></div><strong>${money(p.price*x.qty)}</strong></div>`}).join('')+`<div class="total"><span>Sample subtotal</span><span>${money(cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0))}</span></div><p class="muted">Final price may include making charges, applicable taxes and delivery.</p><button class="primary" style="width:100%" onclick="checkout()">Proceed to checkout</button>`}
+function changeQty(id,n){const x=cart.find(x=>x.id===id);if(x)x.qty+=n;cart=cart.filter(x=>x.qty>0);updateCount();renderCart()}
+function removeCart(id){cart=cart.filter(x=>x.id!==id);updateCount();renderCart()}
+function checkout(){note('Checkout preview only. Real order placement needs customer details, inventory confirmation and a secure payment gateway.');showPage('account')}
+function renderWishlist(){const el=document.getElementById('wishlistContent');const list=products.filter(p=>wishlist.includes(p.id));el.innerHTML=list.length?list.map(p=>`<div class="cartrow"><div><h3>${p.name}</h3><strong>${money(p.price)}</strong></div><button class="primary" onclick="addCart(${p.id})">Add to bag</button><button class="outline" onclick="toggleWish(${p.id})">Remove</button></div>`).join(''):'<div class="empty"><h3>No saved items yet</h3><p class="muted">Tap the heart on a product to save it here.</p><button class="primary" onclick="showPage(\\'home\\')">Browse jewellery</button></div>'}
+function renderCategories(){document.getElementById('categoryGrid').innerHTML=['Rings','Necklaces','Earrings','Bangles','Pendants'].map((c,i)=>`<article class="card" style="padding:24px;text-align:center;cursor:pointer" onclick="category='${c}';showPage('home');renderProducts()"><div style="font-size:52px">${['💍','📿','💎','⭕','✨'][i]}</div><h3>${c}</h3><div class="muted">Explore collection</div></article>`).join('')}
+function demoLogin(){const v=document.getElementById('phone').value.trim();note(v?'Demo only: sign-in is not connected. Your number was not sent anywhere.':'Please enter a mobile number to preview this form.')}
+renderProducts();renderCategories();
+</script><script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(err => console.warn("Offline support unavailable", err))); }</script>
+</body></html>
